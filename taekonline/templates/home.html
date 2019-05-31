@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    
+</div>
+{% endblock content %}
+
+
+{% block footer%}
+{{ block.super }}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom" style="background-color:black;">
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom">-->
+    <div class="container justify-content-center">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Terms and conditions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock footer%}
