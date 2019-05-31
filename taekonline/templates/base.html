@@ -51,7 +51,8 @@
 <body>
     {% block nav %}
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="/"><i class="fas fa-car-alt"></i>
+            <a class="navbar-brand" href="/"><i class="fa fa-id-card-o" aria-hidden="true"></i>
+
 TaekOnline</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -64,6 +65,16 @@ TaekOnline</a>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'product' %}">Product</a>
                     </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Configuration
+                      </a>
+                      <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="#">Class Cathegory</a>
+                          <a class="dropdown-item" href="#">Membership</a>
+                          <a class="dropdown-item" href="#">Level</a>
+                      </div>
+                  </li>
                 </ul>
                 {% if request.user.is_authenticated %}
                 <ul class="navbar-nav">
