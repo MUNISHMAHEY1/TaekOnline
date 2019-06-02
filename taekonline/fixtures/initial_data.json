@@ -1,0 +1,60 @@
+[
+{
+    "model": "taekonline.student",
+    "pk": 1,
+    "fields": {
+        "first_name": "Fabio",
+        "last_name": "Santiago",
+        "date_of_birth": "1979-06-16",
+        "date_joined": "2019-06-02T15:14:36.672Z",
+        "phone_number": "+12269612492",
+        "email": "fabio.ribeiro.santiago@gmail.com",
+        "address_number": 3195,
+        "address_street": "Erindale Crescent",
+        "address_complement": "---",
+        "address_zip_code": "N8W4Y9",
+        "address_city": "Windsor",
+        "active": true
+    }
+},
+{
+    "model": "taekonline.contacttype",
+    "pk": 1,
+    "fields": {
+        "description": "Father"
+    }
+},
+{
+    "model": "taekonline.contacttype",
+    "pk": 2,
+    "fields": {
+        "description": "Mother"
+    }
+},
+{
+    "model": "taekonline.studentcontact",
+    "pk": 2,
+    "fields": {
+        "student": 1,
+        "contact_type": 2,
+        "order": 1,
+        "contact": null,
+        "first_name": "Maria",
+        "last_name": "Santiago",
+        "phone_number": ""
+    }
+},
+{
+    "model": "taekonline.studentcontact",
+    "pk": 3,
+    "fields": {
+        "student": 1,
+        "contact_type": 1,
+        "order": 0,
+        "contact": null,
+        "first_name": "Francisco",
+        "last_name": "Santiago",
+        "phone_number": ""
+    }
+}
+]

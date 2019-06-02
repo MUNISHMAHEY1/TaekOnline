@@ -7,6 +7,7 @@ from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
 from taekonline.models import Student
+from taekonline.tables import StudentTable
 
 
 
@@ -17,8 +18,10 @@ def profile(request):
 	return render(request, 'profile.html')
 
 def student(request):
+
+	students_table = StudentTable(Student.objects.filter(active=True))
 	students = Student.objects.filter(active=True)
-	return render(request, 'students/student_list.html', {'students':students})
+	return render(request, 'students/student_list.html', {'students':students, 'students_table':students_table })
 	#return render(request, 'students/student_list.html')
 
 def product(request):

@@ -51,9 +51,7 @@
 <body>
     {% block nav %}
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="/"><i class="fa fa-id-card-o" aria-hidden="true"></i>
-
-TaekOnline</a>
+            <a class="navbar-brand" href="/">TaekOnline</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,9 +81,9 @@ TaekOnline</a>
                         {{request.user}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                            <a class="dropdown-item" href="#">Profile (Not implemented yet)</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            <a class="dropdown-item" href="#">Logout (Not implemented yet)</a>
                         </div>
                     </li>
                 </ul>

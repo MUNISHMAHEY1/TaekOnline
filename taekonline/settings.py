@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tastypie',
-    'taekonline'
+    'phonenumber_field',
+    'django_tables2',
+    'taekonline',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,5 @@ STATIC_ROOT = BASE_DIR + '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
+
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
