@@ -25,6 +25,8 @@ urlpatterns = [
     path('student/add', views.student_add, name='student_add'),
     path('student/<int:id>/deactivate', views.student_change, name='student_deactivate'),
     path('student/<int:id>/ativate', views.student_change, name='student_activate'),
+    #path('/studentcontact/<int:id>/delete', views.studentcontact_delete, name='studentcontact_delete'),
+    
     #path('student/add'), views.student_add, name='student_add'),
     path('product', views.product, name='product'),
 ]

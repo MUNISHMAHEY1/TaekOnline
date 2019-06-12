@@ -8,7 +8,8 @@ from django.utils import timezone
 from django.http import JsonResponse
 from taekonline.models import Student
 from taekonline.tables import StudentTable
-from taekonline.forms import StudentForm
+from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet
+from django.forms import formset_factory, inlineformset_factory
 
 
 
@@ -26,27 +27,34 @@ def student(request, template_name='students/student_list.html'):
 def student_add(request, template_name='students/student_form.html'):
 	if request.POST:
 		form = StudentForm(request.POST)
-		if form.is_valid():
+		formset = StudentContactFormSet(request.POST, request.FILES)
+		if form.is_valid() and formset.is_valid():
 			form.save()
+			formset.save()
 			return redirect('student')
 		else:
-			return render(request, template_name, {'form':form})
+			return render(request, template_name, {'form':form, 'formset':formset})
 	else:
 		form = StudentForm()
-	return render(request, template_name, {'form':form})
+		formset = StudentContactFormSet()
+	return render(request, template_name, {'form':form, 'formset':formset})
 
 def student_change(request, id, template_name='students/student_form.html'):
 	student = Student.objects.get(id=int(id))
 	if request.POST:
 		form = StudentForm(request.POST, instance=student)
-		if form.is_valid():
+		formset = StudentContactFormSet(request.POST, request.FILES, instance=student)
+
+		if form.is_valid() and formset.is_valid():
 			form.save()
+			formset.save()
 			return redirect('student')
 		else:
-			return render(request, template_name, {'form':form})
+			return render(request, template_name, {'form':form, 'formset':formset})
 	else:
 		form = StudentForm(instance=student)
-	return render(request, template_name, {'form':form})
+		formset = StudentContactFormSet(instance=student)
+	return render(request, template_name, {'form':form, 'formset':formset})
 
 
 

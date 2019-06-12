@@ -40,11 +40,12 @@ class ContactType(models.Model):
 class StudentContact(models.Model):
     student = models.ForeignKey(to=Student, null=False, blank=False, on_delete=models.CASCADE, related_name='student')
     contact_type = models.ForeignKey(to=ContactType, null=False, blank=True, on_delete=models.PROTECT)
-    order = models.IntegerField(null=False, blank=False, default=0)
+    #order = models.IntegerField(null=False, blank=False, default=0)
     contact = models.ForeignKey(to=Student, null=True, blank=True, on_delete=models.CASCADE, related_name='contact')
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     phone_number = PhoneNumberField(blank=True)
+    email = models.EmailField(blank=True, null=True)
 
     def __str__(self):
         if self.contact:
