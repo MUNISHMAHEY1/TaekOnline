@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tastypie',
+    'crispy_forms',
+    'crispy_forms_foundation',
     'phonenumber_field',
     'django_tables2',
     'taekonline',
@@ -137,3 +139,9 @@ MEDIA_ROOT = BASE_DIR + '/media/'
 
 
 DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

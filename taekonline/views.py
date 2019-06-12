@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from taekonline.models import Student
 from taekonline.tables import StudentTable
+from taekonline.forms import StudentForm
 
 
 
@@ -17,12 +18,43 @@ def home(request):
 def profile(request):
 	return render(request, 'profile.html')
 
-def student(request):
+def student(request, template_name='students/student_list.html'):
 
-	students_table = StudentTable(Student.objects.filter(active=True))
-	students = Student.objects.filter(active=True)
-	return render(request, 'students/student_list.html', {'students':students, 'students_table':students_table })
-	#return render(request, 'students/student_list.html')
+	students_table = StudentTable(Student.objects.all())
+	return render(request, template_name, {'students_table':students_table })
+
+def student_add(request, template_name='students/student_form.html'):
+	if request.POST:
+		form = StudentForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('student')
+		else:
+			return render(request, template_name, {'form':form})
+	else:
+		form = StudentForm()
+	return render(request, template_name, {'form':form})
+
+def student_change(request, id, template_name='students/student_form.html'):
+	student = Student.objects.get(id=int(id))
+	if request.POST:
+		form = StudentForm(request.POST, instance=student)
+		if form.is_valid():
+			form.save()
+			return redirect('student')
+		else:
+			return render(request, template_name, {'form':form})
+	else:
+		form = StudentForm(instance=student)
+	return render(request, template_name, {'form':form})
+
+
+
+def student_activate(request, id):
+	pass
+
+def student_deactivate(request, id):
+	pass
 
 def product(request):
 	return render(request, "products/product_list.html")
