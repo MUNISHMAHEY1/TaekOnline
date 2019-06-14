@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
-from taekonline.models import Student
+from taekonline.models import Student, RankHistory
 from taekonline.tables import StudentTable
 from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet
 from django.forms import formset_factory, inlineformset_factory
@@ -56,7 +56,9 @@ def student_change(request, id, template_name='students/student_form.html'):
 		formset = StudentContactFormSet(instance=student)
 	return render(request, template_name, {'form':form, 'formset':formset})
 
-
+def student_rank(request, id, template_name='students/student_rank_list.html'):
+	student = Student.objects.get(id=int(id))
+	return render(request, student)
 
 def student_activate(request, id):
 	pass

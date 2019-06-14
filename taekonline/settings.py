@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms_foundation',
     'phonenumber_field',
     'django_tables2',
-    'taekonline',
+    'taekonline.apps.TaekOnlineConfig',
 ]
 
 MIDDLEWARE = [

@@ -21,10 +21,16 @@ class Student(models.Model):
     address_zip_code = models.CharField(max_length=6, null=False, blank=False)
     address_city = models.CharField(max_length=50, null=False, blank=False)
     active = models.BooleanField(default=True)
-
+    
     @property
     def name(self):
         return ', '.join((self.first_name,self.last_name))
+
+    @property
+    def rank(self):
+        if self.rankhistory_set.count() > 0:
+            return self.rankhistory_set.all().order_by('-rank__order')[0].rank.description
+        return None
 
     def __str__(self):
         return self.name
@@ -52,3 +58,35 @@ class StudentContact(models.Model):
             return self.contact.__str__()
         else:
             return ', '.join((self.first_name,self.last_name))
+
+class Rank(models.Model):
+    description = models.CharField(max_length=100, null=False, blank=False)
+    order = models.IntegerField(null=False, blank=False)
+
+    def __str__(self):
+        return self.description
+
+class RankHistory(models.Model):
+    rank = models.ForeignKey(Rank, null=False, blank=False, on_delete=models.PROTECT)
+    student = models.ForeignKey(Student, null=False, blank=False, on_delete=models.PROTECT)
+    exam_date = models.DateField(null=False, blank=False)
+
+
+class ClassCathegory(models.Model):
+    description = models.CharField(max_length=100, null=False, blank=False)
+    color = models.CharField(max_length=100, null=False, blank=False)
+
+
+class ClassAgenda(models.Model):
+    DAYS_OF_WEEK = (
+        ('Mon', 'Monday'),
+        ('Tue', 'Tuesday'),
+        ('Wed', 'Wednesday'),
+        ('Thu', 'Thursday'),
+        ('Fri', 'Friday'),
+        ('Sat', 'Saturday'),
+        ('Sun', 'Sunday')
+    )
+    week_day = days = models.CharField(max_length=3, null=False, blank=False, choices=DAYS_OF_WEEK, default='Mon')
+    start_time = models.TimeField()
+    end_time = models.TimeField
