@@ -87,6 +87,6 @@ class ClassAgenda(models.Model):
         ('Sat', 'Saturday'),
         ('Sun', 'Sunday')
     )
-    week_day = days = models.CharField(max_length=3, null=False, blank=False, choices=DAYS_OF_WEEK, default='Mon')
+    week_day = models.CharField(max_length=3, null=False, blank=False, choices=DAYS_OF_WEEK, default='Mon')
     start_time = models.TimeField()
-    end_time = models.TimeField
+    end_time = models.TimeField()
