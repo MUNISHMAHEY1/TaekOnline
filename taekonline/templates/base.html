@@ -57,8 +57,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'student' %}">Student<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'student' %}">Student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'attendance' %}">Attendance</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'belt_exam' %}">Belt Exam</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'product' %}">Product</a>

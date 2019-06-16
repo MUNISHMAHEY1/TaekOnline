@@ -122,3 +122,5 @@ class StudentContactForm(forms.ModelForm):
 StudentContactFormSet = inlineformset_factory(
     Student, StudentContact, fk_name='student', form=StudentContactForm,
     extra=2, max_num=2,can_delete=True)
+
+

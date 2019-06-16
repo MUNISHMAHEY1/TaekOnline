@@ -6,10 +6,12 @@ from django.contrib import messages
 from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
-from taekonline.models import Student, RankHistory
-from taekonline.tables import StudentTable
+from taekonline.models import Student, RankHistory, Attendance
+from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable
 from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet
 from django.forms import formset_factory, inlineformset_factory
+from taekonline.business import StudentBusiness
+import datetime
 
 
 
@@ -58,13 +60,49 @@ def student_change(request, id, template_name='students/student_form.html'):
 
 def student_rank(request, id, template_name='students/student_rank_list.html'):
 	student = Student.objects.get(id=int(id))
-	return render(request, student)
+	return render(request, template_name, {'form':form, 'formset':formset})
 
 def student_activate(request, id):
 	pass
 
 def student_deactivate(request, id):
 	pass
+
+def belt_exam(request, template_name='students/belt_exam.html'):
+	students_table = BeltExamTable(Student.objects.filter(active=True))
+	if request.POST:
+		exam_date = request.POST.get('exam_date')
+		
+		# Get the list and transform in a list of integers
+		selected_student = list(map(int, request.POST.getlist('selected_student')))
+		sb = StudentBusiness()
+		for sid in selected_student:
+			sb.increase_rank(request=request, student_id=sid, exam_date=exam_date)
+
+	return render(request, template_name, {'students_table':students_table })
+
+
+def attendance(request, template_name='students/attendance.html'):
+	students_table = AttendanceTable(Student.objects.filter(active=True))
+	if request.POST:
+		class_date = request.POST.get('class_date')
+		class_time = request.POST.get('class_time')
+		datetime_str = class_date + ' ' + class_time
+		class_datetime = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
+		
+		# Get the list and transform in a list of integers
+		selected_student = list(map(int, request.POST.getlist('selected_student')))
+		students = Student.objects.filter(id__in=selected_student)
+		for student in students:
+			attendance = Attendance(student=student, class_date=class_datetime)
+			attendance.save()
+		
+		msg = 'Atterndance for {dt} registred sucessfully.'.format(dt=datetime_str)
+		messages.success(request, msg)
+
+	return render(request, template_name, {'students_table':students_table })
+
+
 
 def product(request):
 	return render(request, "products/product_list.html")

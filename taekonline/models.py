@@ -90,3 +90,7 @@ class ClassAgenda(models.Model):
     week_day = models.CharField(max_length=3, null=False, blank=False, choices=DAYS_OF_WEEK, default='Mon')
     start_time = models.TimeField()
     end_time = models.TimeField()
+
+class Attendance(models.Model):
+    student = models.ForeignKey(Student, null=False, blank=False, on_delete=models.PROTECT)
+    class_date = models.DateTimeField(null=False, blank=False)
