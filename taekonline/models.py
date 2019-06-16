@@ -76,20 +76,22 @@ class ClassCathegory(models.Model):
     description = models.CharField(max_length=100, null=False, blank=False)
     color = models.CharField(max_length=100, null=False, blank=False)
 
+    def __str__(self):
+        return self.description
+
 
 class ClassAgenda(models.Model):
-    DAYS_OF_WEEK = (
-        ('Mon', 'Monday'),
-        ('Tue', 'Tuesday'),
-        ('Wed', 'Wednesday'),
-        ('Thu', 'Thursday'),
-        ('Fri', 'Friday'),
-        ('Sat', 'Saturday'),
-        ('Sun', 'Sunday')
-    )
-    week_day = models.CharField(max_length=3, null=False, blank=False, choices=DAYS_OF_WEEK, default='Mon')
+    cathegory = models.ForeignKey(ClassCathegory, null=True, blank=True, on_delete=models.SET_NULL)
     start_time = models.TimeField()
     end_time = models.TimeField()
+    sunday = models.BooleanField(default=False)
+    monday = models.BooleanField(default=False)
+    tuesday = models.BooleanField(default=False)
+    wednesday = models.BooleanField(default=False)
+    thursday = models.BooleanField(default=False)
+    friday = models.BooleanField(default=False)
+    saturday = models.BooleanField(default=False)
+
 
 class Attendance(models.Model):
     student = models.ForeignKey(Student, null=False, blank=False, on_delete=models.PROTECT)

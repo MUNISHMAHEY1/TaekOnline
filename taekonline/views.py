@@ -58,9 +58,12 @@ def student_change(request, id, template_name='students/student_form.html'):
 		formset = StudentContactFormSet(instance=student)
 	return render(request, template_name, {'form':form, 'formset':formset})
 
-def student_rank(request, id, template_name='students/student_rank_list.html'):
+def rank_history(request, id, template_name='students/student_rank_history.html'):
 	student = Student.objects.get(id=int(id))
-	return render(request, template_name, {'form':form, 'formset':formset})
+	rank_history = RankHistory.objects.filter(student__id=int(id))
+	attendance = Attendance.objects.filter(student__id=int(id))
+
+	return render(request, template_name, {'student': student, 'rank_history':rank_history, 'attendance':attendance})
 
 def student_activate(request, id):
 	pass

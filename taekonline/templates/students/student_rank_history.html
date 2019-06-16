@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% load static %}
+
+{% block extrahead %}
+<script>
+$(document).ready(function() {
+    $('#rank_hitory').DataTable();
+    $('#attendance').DataTable();
+} );
+</script>
+{% endblock extrahead %}
+
+
+{% block content %}
+<nav class="navbar navbar-dark bg-primary" style="margin-top: 25px;margin-bottom: 25px;">
+    <a class="navbar-brand" href="#">Rank History - {{student.name}}</a>
+</nav>
+
+{% for r in rank_history %}
+<ul class="list-group">
+    <li class="list-group-item" style="background-color: {{r.rank.description}};">{{r.exam_date}}</li>
+</ul>
+{% endfor %}
+
+{% render_table rank_history %}
+
+{% render_table attendance %}
+
+
+{% endblock content %}

@@ -25,7 +25,7 @@ urlpatterns = [
     path('student/add', views.student_add, name='student_add'),
     path('student/<int:id>/deactivate', views.student_change, name='student_deactivate'),
     path('student/<int:id>/ativate', views.student_change, name='student_activate'),
-    path('student/<int:id>/rank', views.student_change, name='student_rank'),
+    path('student/<int:id>/rank_history', views.rank_history, name='rank_history'),
     path('belt_exam', views.belt_exam, name='belt_exam'),
     path('attendance', views.attendance, name='attendance'),
 
