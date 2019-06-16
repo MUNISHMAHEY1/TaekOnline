@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     var date = new Date();
 
-    if (!$("#id_exam_date").val()) {
+    if (!$("#id_class_date").val()) {
         var day = date.getDate();
         var month = date.getMonth() + 1;
         var year = date.getFullYear();
@@ -23,7 +23,7 @@ $(document).ready(function() {
         $("#id_class_date").attr("value", today);
     }
 
-    if (!$("#id_exam_time").val()) {
+    if (!$("#id_class_time").val()) {
         var hour = date.getHours();
         var minutes = date.getMinutes();
         if(hour < 10) hour = '0' + hour; 

@@ -72,12 +72,15 @@ def belt_exam(request, template_name='students/belt_exam.html'):
 	students_table = BeltExamTable(Student.objects.filter(active=True))
 	if request.POST:
 		exam_date = request.POST.get('exam_date')
+		exam_time = request.POST.get('exam_time')
+		datetime_str = exam_date + ' ' + exam_time
+		exam_datetime = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
 		
 		# Get the list and transform in a list of integers
 		selected_student = list(map(int, request.POST.getlist('selected_student')))
 		sb = StudentBusiness()
 		for sid in selected_student:
-			sb.increase_rank(request=request, student_id=sid, exam_date=exam_date)
+			sb.increase_rank(request=request, student_id=sid, exam_date=exam_datetime)
 
 	return render(request, template_name, {'students_table':students_table })
 

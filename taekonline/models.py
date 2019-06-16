@@ -69,7 +69,7 @@ class Rank(models.Model):
 class RankHistory(models.Model):
     rank = models.ForeignKey(Rank, null=False, blank=False, on_delete=models.PROTECT)
     student = models.ForeignKey(Student, null=False, blank=False, on_delete=models.PROTECT)
-    exam_date = models.DateField(null=False, blank=False)
+    exam_date = models.DateTimeField(null=False, blank=False)
 
 
 class ClassCathegory(models.Model):

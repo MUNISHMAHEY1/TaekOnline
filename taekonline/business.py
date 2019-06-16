@@ -4,7 +4,7 @@ from django.contrib import messages
 
 class StudentBusiness:
 
-    def increase_rank(self, request, student_id, exam_date=datetime.date.today()):
+    def increase_rank(self, request, student_id, exam_date=datetime.datetime.now()):
         student = Student.objects.get(id=student_id)
 
         next_rank = None

@@ -9,9 +9,9 @@ $(document).ready(function() {
 } );
 $(document).ready(function() {
 
-    if (!$("#id_exam_date").val()) {
-        var date = new Date();
+    var date = new Date();
 
+    if (!$("#id_exam_date").val()) {
         var day = date.getDate();
         var month = date.getMonth() + 1;
         var year = date.getFullYear();
@@ -21,6 +21,15 @@ $(document).ready(function() {
 
         var today = year + "-" + month + "-" + day;       
         $("#id_exam_date").attr("value", today);
+    }
+
+    if (!$("#id_exam_time").val()) {
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+        if(hour < 10) hour = '0' + hour; 
+        if(minutes < 10) minutes = '0' + minutes; 
+        var now = hour + ":" + minutes;
+        $("#id_exam_time").attr("value", now);
     }
 });
 </script>
@@ -38,6 +47,10 @@ $(document).ready(function() {
         <div class="col-md-6">
             <label for="id_exam_date">Exam Date:</label>
             <input type="date" id="id_exam_date" name="exam_date" required>
+        </div>
+        <div class="col-md-6">
+            <label for="id_exam_time">Exam Date:</label>
+            <input type="time" id="id_exam_time" name="exam_time" required>
         </div>
     </div>
     {% render_table students_table %}
