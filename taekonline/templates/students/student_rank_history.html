@@ -16,16 +16,27 @@ $(document).ready(function() {
 <nav class="navbar navbar-dark bg-primary" style="margin-top: 25px;margin-bottom: 25px;">
     <a class="navbar-brand" href="#">Rank History - {{student.name}}</a>
 </nav>
-
-{% for r in rank_history %}
-<ul class="list-group">
-    <li class="list-group-item" style="background-color: {{r.rank.description}};">{{r.exam_date}}</li>
-</ul>
+{% for rh in rank_history %}
+    {% cycle '1' '2' '3' as row silent %}
+    {% if row == '1' %}
+        <div class="row" style="margin-top: 15px;">
+    {% endif %}
+        <div class="col-md-4">
+            <div class="card">
+                {% if rh.rank__description|lower in 'white,none' %}
+                    <div class="card-header bg-light">Exam Date: {{rh.exam_date|date:'Y-m-d H:i'}}</div>
+                {% elif rh.rank__description|lower in 'yellow' %}
+                    <div class="card-header bg-warning">Exam Date: {{rh.exam_date|date:'Y-m-d H:i'}}</div>
+                {% else %}
+                    <div class="card-header" style="background-color:{{rh.rank__description|lower}};">Exam Date: {{rh.exam_date|date:'Y-m-d H:i'}}</div>
+                {% endif %}
+                <div class="card-body">{% for att in rh.attendances %}<li class="list-group-item">{{att|date:'Y-m-d H:i'}}</li>{% endfor %}</div>
+                <div class="card-footer">Attendance: {{ rh.attendances|length }}</div>
+            </div>
+        </div>
+    {% if row == '3' or forloop.last %}
+        </div>
+    {% endif %}
 {% endfor %}
-
-{% render_table rank_history %}
-
-{% render_table attendance %}
-
 
 {% endblock content %}

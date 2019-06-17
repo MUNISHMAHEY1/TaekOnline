@@ -60,10 +60,18 @@ def student_change(request, id, template_name='students/student_form.html'):
 
 def rank_history(request, id, template_name='students/student_rank_history.html'):
 	student = Student.objects.get(id=int(id))
-	rank_history = RankHistory.objects.filter(student__id=int(id))
-	attendance = Attendance.objects.filter(student__id=int(id))
+	rank_history = list(RankHistory.objects.filter(student__id=int(id)).values('rank__description', 'exam_date').order_by('exam_date'))
+	attendance = Attendance.objects.filter(student__id=int(id)).order_by('class_date').values()
+	
+	for rh in rank_history:
+		rh['attendances'] = []
+	for att in attendance:
+		for rh in rank_history:
+			if att['class_date'] < rh['exam_date']:
+				rh['attendances'].append(att['class_date'])
+				break
 
-	return render(request, template_name, {'student': student, 'rank_history':rank_history, 'attendance':attendance})
+	return render(request, template_name, {'student': student, 'rank_history': rank_history})
 
 def student_activate(request, id):
 	pass
