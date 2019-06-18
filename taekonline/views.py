@@ -151,7 +151,7 @@ def income_add(request, template_name='income/income_form.html'):
 							f_product.quantity = f_product.quantity - int(f_quantity)
 							f_product.save()
 						else:
-							f.add_error('quantity', 'Quantity is greater than in inventory')
+							f.add_error('quantity', 'Quantity is greater than the quantity in inventory')
 		if form.is_valid() and formset.is_valid():
 			form.save()
 			formset.save()

@@ -55,10 +55,21 @@ class AttendanceTable(tables.Table):
 
 
 class IncomeTable(tables.Table):
-    #actions = ProductActions(orderable=False) # custom tables.Column()
-    id = tables.TemplateColumn('<a href="/income/{{record.id}}/change">{{record.id}}</a>')
+    #id = tables.TemplateColumn('<a href="/income/{{record.id}}/change">{{record.id}}</a>')
+    
     class Meta:
         model = Income
-        fields = ['id', 'income_date', 'income_time', 'student'] # fields to display
+        fields = ['id', 'income_datetime', 'student', 'products'] # fields to display
         attrs = {'id': 'income_table'}
 
+    '''
+    def render_income_time(self, value):
+        return value.strftime("%H:%M")
+
+    def render_income_date(self, value):
+        return value.strftime("%Y-%m-%d")
+
+    def render_income_datetime(self, value, record):
+        return record.income_date.strftime("%Y-%m-%d")
+        return ' '.join((record.income_date.strftime("%Y-%m-%d"), record.income_time.strftime("%H:%M")))
+    '''

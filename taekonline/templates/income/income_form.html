@@ -59,7 +59,12 @@
                         {% for hidden in f.hidden_fields %}
                                 {{ hidden }}
                         {% endfor %}
-                        {{ field.errors.as_ul }}
+                        {% for e in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ e|safe }}
+                            </div>
+                        {% endfor %}
+
                         {{ field }}
                     </td>
                 {% endfor %}
