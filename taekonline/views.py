@@ -122,8 +122,10 @@ def product(request):
 	return render(request, "products/product_list.html")
 
 def about_us(request):
-	return render(request, "about_us.html")	
+	return render(request, "about_us.html")
 
+def project(request):
+	return render(request, "project.html")	
 
 def income(request, template_name='income/income_list.html'):
 
