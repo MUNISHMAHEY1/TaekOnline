@@ -66,7 +66,7 @@ def rank_history(request, id, template_name='students/student_rank_history.html'
 	student = Student.objects.get(id=int(id))
 	rank_history = list(RankHistory.objects.filter(student__id=int(id)).values('rank__description', 'exam_date').order_by('exam_date'))
 	attendance = Attendance.objects.filter(student__id=int(id)).order_by('class_date').values()
-	
+
 	for rh in rank_history:
 		rh['attendances'] = []
 	for att in attendance:
@@ -90,7 +90,7 @@ def belt_exam(request, template_name='students/belt_exam.html'):
 		exam_time = request.POST.get('exam_time')
 		datetime_str = exam_date + ' ' + exam_time
 		exam_datetime = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
-		
+
 		# Get the list and transform in a list of integers
 		selected_student = list(map(int, request.POST.getlist('selected_student')))
 		sb = StudentBusiness()
@@ -107,14 +107,14 @@ def attendance(request, template_name='students/attendance.html'):
 		class_time = request.POST.get('class_time')
 		datetime_str = class_date + ' ' + class_time
 		class_datetime = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
-		
+
 		# Get the list and transform in a list of integers
 		selected_student = list(map(int, request.POST.getlist('selected_student')))
 		students = Student.objects.filter(id__in=selected_student)
 		for student in students:
 			attendance = Attendance(student=student, class_date=class_datetime)
 			attendance.save()
-		
+
 		msg = 'Atterndance for {dt} registred sucessfully.'.format(dt=datetime_str)
 		messages.success(request, msg)
 
@@ -125,6 +125,11 @@ def attendance(request, template_name='students/attendance.html'):
 def product(request):
 	return render(request, "products/product_list.html")
 
+def about_us(request):
+	return render(request, "about_us.html")
+
+def project(request):
+	return render(request, "project.html")	
 
 def income(request, template_name='income/income_list.html'):
 

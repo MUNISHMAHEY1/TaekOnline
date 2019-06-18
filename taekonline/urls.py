@@ -32,7 +32,10 @@ urlpatterns = [
     path('income/add', views.income_add, name='income_add'),
 
     #path('/studentcontact/<int:id>/delete', views.studentcontact_delete, name='studentcontact_delete'),
-    
+
     #path('student/add'), views.student_add, name='student_add'),
     path('product', views.product, name='product'),
+    path('about_us', views.about_us, name='about_us'),
+    path('project', views.project, name='project'),
+
 ]
