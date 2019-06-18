@@ -1,7 +1,8 @@
 from django import forms
-from taekonline.models import Student, StudentContact
+from taekonline.models import Student, StudentContact, Income, IncomeProduct, Product
 from crispy_forms.helper import FormHelper
-from crispy_forms_foundation.layout import Layout, Fieldset, SplitDateTimeField, Row, Column, ButtonHolder, Submit, ButtonGroup, Button
+from crispy_forms_foundation.layout import Layout, Fieldset, SplitDateTimeField, Row, \
+    Column, ButtonHolder, Submit, ButtonGroup, Button
 from django.forms.models import inlineformset_factory
 
 class StudentForm(forms.ModelForm):
@@ -124,3 +125,32 @@ StudentContactFormSet = inlineformset_factory(
     extra=2, max_num=2,can_delete=True)
 
 
+
+
+class IncomeForm(forms.ModelForm):
+
+    class Meta:
+        model = Income
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.render_required_fields = True
+        self.helper.render_hidden_fields = True
+        self.helper.form_method = 'post'
+        self.helper.form_show_errors = True
+        self.helper.layout = Layout(
+            Row(
+                Column('student'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('date', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            )
+        )
+    
+IncomeProductFormSet = inlineformset_factory(
+    Income, IncomeProduct, fk_name='income', form=IncomeForm,
+    extra=1, can_delete=True)

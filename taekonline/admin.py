@@ -1,6 +1,6 @@
 from django.contrib import admin
 from taekonline.models import Student, ContactType, StudentContact, Rank, \
-    RankHistory, ClassAgenda, ClassCathegory, Attendance
+    RankHistory, ClassAgenda, ClassCathegory, Attendance, Product, Income, IncomeProduct
 
 # Register your models here.
 
@@ -30,6 +30,19 @@ class ClassCathegoryAdmin(admin.ModelAdmin):
 class AttendanceAdmin(admin.ModelAdmin):
     list_display = ['id', 'student', 'class_date']
 
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'description', 'quantity', 'cost_price', 'selling_price']
+
+class IncomeProductInline(admin.TabularInline):
+    model = IncomeProduct
+    exclude = ['profit']
+    extra = 1
+
+class IncomeAdmin(admin.ModelAdmin):
+    list_display = ['id', 'date', 'student']
+    inlines = [IncomeProductInline, ]
+
+
 
 
 
@@ -42,3 +55,5 @@ admin.site.register(RankHistory, RankHistoryAdmin)
 admin.site.register(ClassAgenda, ClassAgendaAdmin)
 admin.site.register(ClassCathegory, ClassCathegoryAdmin)
 admin.site.register(Attendance, AttendanceAdmin)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Income, IncomeAdmin)

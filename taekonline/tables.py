@@ -1,4 +1,4 @@
-from taekonline.models import Student
+from taekonline.models import Student, Income
 import django_tables2 as tables
 from django.utils.html import format_html
 
@@ -51,3 +51,14 @@ class AttendanceTable(tables.Table):
         elif value.lower() in ("yellow"):
             return format_html('<a href="/student/{}/rank_history"><span class="badge badge-warning">{}</span></a>', record.id, value)
         return format_html('<a href="/student/{}/rank_history"><span class="badge badge-dark" style="background-color: {};">{}</span></a>', record.id, value.lower(), value)
+
+
+
+class IncomeTable(tables.Table):
+    #actions = ProductActions(orderable=False) # custom tables.Column()
+    id = tables.TemplateColumn('<a href="/income/{{record.id}}/change">{{record.id}}</a>')
+    class Meta:
+        model = Income
+        fields = ['id', 'date', 'student'] # fields to display
+        attrs = {'id': 'income_table'}
+

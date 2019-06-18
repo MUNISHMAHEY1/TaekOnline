@@ -28,6 +28,8 @@ urlpatterns = [
     path('student/<int:id>/rank_history', views.rank_history, name='rank_history'),
     path('belt_exam', views.belt_exam, name='belt_exam'),
     path('attendance', views.attendance, name='attendance'),
+    path('income', views.income, name='income'),
+    path('income/add', views.income_add, name='income_add'),
 
     #path('/studentcontact/<int:id>/delete', views.studentcontact_delete, name='studentcontact_delete'),
     

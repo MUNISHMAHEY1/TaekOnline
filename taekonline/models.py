@@ -96,3 +96,41 @@ class ClassAgenda(models.Model):
 class Attendance(models.Model):
     student = models.ForeignKey(Student, null=False, blank=False, on_delete=models.PROTECT)
     class_date = models.DateTimeField(null=False, blank=False)
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100, null=False, blank=False, unique=True)
+    description = models.CharField(max_length=200, null=False, blank=False)
+    cost_price = models.DecimalField(null=False, blank=False, max_digits=18, decimal_places=2, default=0)
+    selling_price = models.DecimalField(null=False, blank=False, max_digits=18, decimal_places=2)
+    quantity = models.IntegerField(null=False, blank=False, default=1)
+    keep_inventory = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+class Income(models.Model):
+    date = models.DateTimeField(null=False, blank=False)
+    student = models.ForeignKey(Student, null=True, blank=True, on_delete=models.CASCADE)
+    products = models.ManyToManyField(to='Product', through='IncomeProduct')
+
+class IncomeProduct(models.Model):
+    income = models.ForeignKey(Income, null=False, blank=False, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
+    quantity = models.IntegerField(null=False, blank=False, default=1)
+    profit = models.DecimalField(null=True, blank=True, max_digits=18, decimal_places=2)
+
+    def __str__(self):
+        return ' '.join((str(self.income.id), self.product.name))
+
+    def save(self, *args, **kwargs):
+        self.profit = self.quantity * (self.product.selling_price - self.product.cost_price)
+        super().save(*args, **kwargs)
+
+
+
+
+
+
+
+
