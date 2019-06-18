@@ -39,7 +39,7 @@ class IncomeProductInline(admin.TabularInline):
     extra = 1
 
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'date', 'student']
+    list_display = ['id', 'income_date', 'income_time', 'student']
     inlines = [IncomeProductInline, ]
 
 

@@ -6,12 +6,14 @@ from django.contrib import messages
 from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
-from taekonline.models import Student, RankHistory, Attendance, Income
+from taekonline.models import Student, RankHistory, Attendance, Income, Product, IncomeProduct
 from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable
-from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet
+from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet, \
+	IncomeForm, IncomeProductFormSet
 from django.forms import formset_factory, inlineformset_factory
 from taekonline.business import StudentBusiness
 import datetime
+from django.db import transaction
 
 
 
@@ -26,10 +28,11 @@ def student(request, template_name='students/student_list.html'):
 	students_table = StudentTable(Student.objects.all())
 	return render(request, template_name, {'students_table':students_table })
 
+@transaction.atomic
 def student_add(request, template_name='students/student_form.html'):
 	if request.POST:
 		form = StudentForm(request.POST)
-		formset = StudentContactFormSet(request.POST, request.FILES)
+		formset = StudentContactFormSet(request.POST, request.FILES, instance=form.instance)
 		if form.is_valid() and formset.is_valid():
 			form.save()
 			formset.save()
@@ -41,6 +44,7 @@ def student_add(request, template_name='students/student_form.html'):
 		formset = StudentContactFormSet()
 	return render(request, template_name, {'form':form, 'formset':formset})
 
+@transaction.atomic
 def student_change(request, id, template_name='students/student_form.html'):
 	student = Student.objects.get(id=int(id))
 	if request.POST:
@@ -127,20 +131,30 @@ def income(request, template_name='income/income_list.html'):
 	income_table = IncomeTable(Income.objects.all())
 	return render(request, template_name, {'income_table':income_table })
 
+@transaction.atomic
 def income_add(request, template_name='income/income_form.html'):
-	'''
 	if request.POST:
-		form = StudentForm(request.POST)
-		formset = StudentContactFormSet(request.POST, request.FILES)
+		form = IncomeForm(request.POST)
+		formset = IncomeProductFormSet(request.POST, request.FILES, instance=form.instance, prefix='products')
+		if formset.is_valid():
+			for f in formset:
+					cd = f.cleaned_data
+					f_product = cd.get('product')
+					f_quantity = cd.get('quantity')
+					if f_product.keep_inventory:
+						if f_product.quantity > int(f_quantity):
+							f_product.quantity = f_product.quantity - int(f_quantity)
+							f_product.save()
+						else:
+							f.add_error('quantity', 'Quantity is greater than in inventory')
 		if form.is_valid() and formset.is_valid():
 			form.save()
 			formset.save()
-			return redirect('student')
+			return redirect('income')
 		else:
 			return render(request, template_name, {'form':form, 'formset':formset})
 	else:
-		form = StudentForm()
-		formset = StudentContactFormSet()
+		form = IncomeForm()
+		#formset = IncomeProductFormSet()
+		formset = IncomeProductFormSet(prefix='products')
 	return render(request, template_name, {'form':form, 'formset':formset})
-	'''
-	return render(request, template_name)

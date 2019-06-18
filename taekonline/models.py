@@ -110,9 +110,9 @@ class Product(models.Model):
         return self.name
 
 class Income(models.Model):
-    date = models.DateTimeField(null=False, blank=False)
+    income_date = models.DateField(null=False, blank=False)
+    income_time = models.TimeField(null=False, blank=False)
     student = models.ForeignKey(Student, null=True, blank=True, on_delete=models.CASCADE)
-    products = models.ManyToManyField(to='Product', through='IncomeProduct')
 
 class IncomeProduct(models.Model):
     income = models.ForeignKey(Income, null=False, blank=False, on_delete=models.CASCADE)
@@ -123,9 +123,12 @@ class IncomeProduct(models.Model):
     def __str__(self):
         return ' '.join((str(self.income.id), self.product.name))
 
+    '''
     def save(self, *args, **kwargs):
         self.profit = self.quantity * (self.product.selling_price - self.product.cost_price)
-        super().save(*args, **kwargs)
+        super(Model, self).save(*args, **kwargs)
+        #super().save(*args, **kwargs)
+    '''
 
 
 

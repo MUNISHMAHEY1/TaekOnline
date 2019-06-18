@@ -129,6 +129,9 @@ StudentContactFormSet = inlineformset_factory(
 
 class IncomeForm(forms.ModelForm):
 
+    income_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
+    income_time = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}))
+
     class Meta:
         model = Income
         fields = '__all__'
@@ -142,15 +145,21 @@ class IncomeForm(forms.ModelForm):
         self.helper.form_show_errors = True
         self.helper.layout = Layout(
             Row(
-                Column('student'),
+                Column('student', css_class='form-group'),
                 css_class='form-row'
             ),
             Row(
-                Column('date', css_class='form-group col-md-6 mb-0'),
+                Column('income_date', css_class='form-group col-md-6'),
+                Column('income_time', css_class='form-group col-md-6'),
                 css_class='form-row'
             )
         )
+
+class IncomeProductForm(forms.ModelForm):  
+    class Meta:  
+        model = IncomeProduct  
+        exclude = ('profit',)
     
 IncomeProductFormSet = inlineformset_factory(
-    Income, IncomeProduct, fk_name='income', form=IncomeForm,
+    Income, IncomeProduct, fk_name='income', form=IncomeProductForm,
     extra=1, can_delete=True)

@@ -59,6 +59,6 @@ class IncomeTable(tables.Table):
     id = tables.TemplateColumn('<a href="/income/{{record.id}}/change">{{record.id}}</a>')
     class Meta:
         model = Income
-        fields = ['id', 'date', 'student'] # fields to display
+        fields = ['id', 'income_date', 'income_time', 'student'] # fields to display
         attrs = {'id': 'income_table'}
 
