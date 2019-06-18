@@ -1,53 +1,36 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load staticfiles %}
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <h1 class="jump">Taekonline - Advanced Databases Project</h1>
+<style>
+		.jumbotron{
+				background-color:#128EF5;
+				color:#ffffff;
+			}
+
+		</style>
+		<div class="jumbotron">
+            <h1 class="jump" color=blue>Welcome!</h1>
+            <p class="lead">Tae  Kwon  Do (also known as Taekwondo) is the art of self defense that originated in Korea. It is recognized as one of the oldest forms of martial arts in the world, reaching back over 2,000 years. The name was selected for its appropriate description of the art: Tae  (foot), Kwon  (hand), Do  (art).</p>
         </div>
-    </div>
-</div>
+
+<div class="container-fluid">
 <div class="row">
-    <div class="col-md-12">
-            <h6>The scope of the project can be defined as follows:<br>
-                1. Allows user to keep track of current as well as previous students<br>
-                2. Allows to register new students<br>
-                3. Keep track of the guardians and the emergency contact<br>
-                4. Allows store owner to keep track of the inventory of the accessories <br>
-            </h6>
-    </div>
+<div class="col-sm-8">
+<h2> What is Taekwondo?</h2>
+<p>
+“Tae” refers to the legs and lower torso, which provide the force necessary to do the hopping, jumping, and flying kicks that Taekwondo is famous for. The lower torso is also where the center of balance for the body is located.
+
+“Kwon,” as with “Tae”, means more than just “striking with hands.” It refers to the upper body and arms as well. Finger tips, wrists, fists and elbows are also used to strike with. An inherent part of the term “Kwon” also means defense. It is the complement of attack or strike and must be explored in order to learn balance of form and technique.
+
+“Do” means “the way.” This is the domain of the mind and indicates that more is involved than just training the body. It is not enough for the practitioner to become proficient in just the physical aspects of the art; his mind and body must work together in harmony, embodying the spirit of oneness.
+</p>
 </div>
-<div class="row">
-        <div class="col-md-12">
-        <h2>Development Team</h2>
-        <table class="table table-stripes table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Student ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Fabio Ribeiro Santiago</td>
-              <td>104934797</td>
-             
-            </tr>
-            <tr>
-              <td>Sarath Pulikkal</td>
-              <td>105099194</td>
-              
-            </tr>
-            <tr>
-              <td>Munish</td>
-              <td>105146209</td>
-              
-            </tr>
-          </tbody>
-        </table>
-        </div>
+<div class="col-sm-4">
+<img src="{% static "images/main.jpg"%}" alt="Image cannot be found">
 </div>
+</div>
+</div>
+
 {% endblock content %}
 
 
