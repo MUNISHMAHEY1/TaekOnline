@@ -76,21 +76,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'product' %}">Product</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'incomeproduct' %}">Income Product Report</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Report
+                        </a>
+                        <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'incomeproduct' %}">Income</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Admin
                       </a>
                       <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="/admin/taekonline/classagenda/">Class Agenda</a>
-                          <a class="dropdown-item" href="/admin/taekonline/classcathegory/">Class Cathegory</a>
-                          <a class="dropdown-item" href="/admin/taekonline/contacttype/">Contact Type</a>
+                          <a class="dropdown-item" href="/admin/taekonline/classagenda/" target="_blank">Class Agenda</a>
+                          <a class="dropdown-item" href="/admin/taekonline/classcathegory/" target="_blank">Class Cathegory</a>
+                          <a class="dropdown-item" href="/admin/taekonline/contacttype/" target="_blank">Contact Type</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="/admin/taekonline/rank/">Rank</a>
+                          <a class="dropdown-item" href="/admin/taekonline/rank/" target="_blank">Rank</a>
                       </div>
-                  </li>
+                    </li>
                 </ul>
                 {% if request.user.is_authenticated %}
                 <ul class="navbar-nav">

@@ -10,8 +10,8 @@ class StudentAdmin(admin.ModelAdmin):
  
 
 class ContactTypeAdmin(admin.ModelAdmin):
-    list_display = ['description']
-
+    list_display = ['id', 'description']
+    list_editable = ['description']
 
 class RankAdmin(admin.ModelAdmin):
     list_display = ['id', 'order', 'description']
@@ -25,9 +25,11 @@ class StudentContactAdmin(admin.ModelAdmin):
 
 class ClassAgendaAdmin(admin.ModelAdmin):
     list_display = ['id', 'cathegory', 'start_time', 'end_time','sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+    list_editable = ['cathegory', 'start_time', 'end_time','sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
 class ClassCathegoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'description']
+    list_display = ['id', 'description', 'color']
+    list_editable = ['description', 'color']
 
 class AttendanceAdmin(admin.ModelAdmin):
     list_display = ['id', 'student', 'class_date']
