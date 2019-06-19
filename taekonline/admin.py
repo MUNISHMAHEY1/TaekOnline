@@ -12,8 +12,10 @@ class StudentAdmin(admin.ModelAdmin):
 class ContactTypeAdmin(admin.ModelAdmin):
     list_display = ['description']
 
+
 class RankAdmin(admin.ModelAdmin):
-    list_display = ['description']
+    list_display = ['id', 'order', 'description']
+    list_editable = ['order', 'description']
 
 class RankHistoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'student', 'rank', 'exam_date']

@@ -75,7 +75,7 @@ def rank_history(request, id, template_name='students/student_rank_history.html'
 	for att in attendance:
 		for rh in rank_history:
 			if att['class_date'] < rh['exam_date'] or (att['class_date'] > rh['exam_date'] and rh == rank_history[-1]):
-				rh['attendances'].append(att['class_date'])
+				rh['attendances'].append({ 'class_date': att['class_date'], 'id':att['id'] })
 				break
 
 	return render(request, template_name, {'student': student, 'rank_history': rank_history})
@@ -125,6 +125,11 @@ def attendance(request, template_name='students/attendance.html'):
 
 	return render(request, template_name, {'students_table':students_table })
 
+def attendance_delete(request, id, template_name='students/student_rank_history.html'):
+	attendance = Attendance.objects.get(id=int(id))
+	student_id = attendance.student.id
+	attendance.delete()
+	return redirect('rank_history', id=student_id)
 
 
 def product(request,template_name='products/product_list.html'):

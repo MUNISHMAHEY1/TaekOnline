@@ -61,7 +61,7 @@ class StudentContact(models.Model):
 
 class Rank(models.Model):
     description = models.CharField(max_length=100, null=False, blank=False)
-    order = models.IntegerField(null=False, blank=False)
+    order = models.IntegerField(null=False, blank=False, unique=True)
 
     def __str__(self):
         return self.description

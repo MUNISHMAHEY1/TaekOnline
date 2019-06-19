@@ -37,10 +37,9 @@ class AttendanceTable(tables.Table):
     #actions = ProductActions(orderable=False) # custom tables.Column()
     select = tables.TemplateColumn('<input type="checkbox" name="selected_student" value="{{record.id}}" />')
     id = tables.TemplateColumn('<a href="/student/{{record.id}}/change">{{record.id}}</a>')
-    #action = tables.TemplateColumn('<a class="btn btn-small" onclick="return nextBelt({{record.id}})">Next Belt</a>')
     class Meta:
         model = Student
-        fields = ['select', 'id', 'name', 'date_of_birth', 'phone_number', 'email', 'rank',] # fields to display
+        fields = ['select', 'id', 'name', 'date_of_birth', 'phone_number', 'email', 'rank'] # fields to display
         attrs = {'id': 'student_table'}
 
     def render_rank(self, value, record):

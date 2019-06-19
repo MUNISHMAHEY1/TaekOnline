@@ -28,6 +28,7 @@ urlpatterns = [
     path('student/<int:id>/rank_history', views.rank_history, name='rank_history'),
     path('belt_exam', views.belt_exam, name='belt_exam'),
     path('attendance', views.attendance, name='attendance'),
+    path('attendance/<int:id>/delete', views.attendance_delete, name='attendance_delete'),
     path('income', views.income, name='income'),
     path('income/add', views.income_add, name='income_add'),
     path('incomeproduct', views.incomeproduct, name='incomeproduct'),
