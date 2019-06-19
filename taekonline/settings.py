@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'crispy_forms_foundation',
     'phonenumber_field',
     'django_tables2',
+    'django_filters',
+    'bootstrap4',
     'taekonline.apps.TaekOnlineConfig',
 ]
 

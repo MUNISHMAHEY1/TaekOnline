@@ -7,13 +7,16 @@ from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
 from taekonline.models import Student, RankHistory, Attendance, Income, Product, IncomeProduct
-from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable
+from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable, \
+	IncomeProductTable
 from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet, \
 	IncomeForm, IncomeProductFormSet
 from django.forms import formset_factory, inlineformset_factory
 from taekonline.business import StudentBusiness
 import datetime
 from django.db import transaction
+from django_tables2 import RequestConfig
+from taekonline.filters import IncomeProductFilter
 
 
 
@@ -163,3 +166,54 @@ def income_add(request, template_name='income/income_form.html'):
 		#formset = IncomeProductFormSet()
 		formset = IncomeProductFormSet(prefix='products')
 	return render(request, template_name, {'form':form, 'formset':formset})
+
+
+def incomeproduct(request, template_name='incomeproduct/incomeproduct_list.html'):
+
+	queryset = IncomeProduct.objects.all()
+	f = IncomeProductFilter(request.GET, queryset=queryset)
+	table = IncomeProductTable(f.qs)
+	dtable = f.qs.all()
+
+	RequestConfig(request).configure(table)
+	return render(request, template_name, {'table':table, 'filter':f, 'dtable':dtable })
+	#incomeproduct_table = IncomeProductTable(Income.objects.all())
+	#return render(request, template_name, {'incomeproduct_table':incomeproduct_table })
+
+
+
+'''
+
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
+from django.views import View
+import requests
+from django.contrib import messages
+import datetime
+from estatistica_pje import settings
+from .forms import FiltroProcessoForm
+from estatistica_pje.tables import ProcessoTable
+from django_tables2 import RequestConfig
+from .models import VwProcessoAcervo as Processo, TbOrgaoJulgador as Relator
+from .filters import ProcessoFilter
+
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+ 
+
+def home(request):
+    
+    return render(request, 'home.html') 
+
+def processo_list(request):
+    
+    form = FiltroProcessoForm()
+    queryset = Processo.objects.all().using('pje')
+    f = ProcessoFilter(request.GET, queryset=queryset)
+    table = ProcessoTable(f.qs)
+    dtable = f.qs.all()
+    
+    RequestConfig(request).configure(table)
+    return render(request, 'processos.html', {'form': form, 'table':table, 'filter':f, 'dtable':dtable })
+
+'''

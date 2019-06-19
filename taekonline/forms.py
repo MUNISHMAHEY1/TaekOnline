@@ -163,3 +163,5 @@ class IncomeProductForm(forms.ModelForm):
 IncomeProductFormSet = inlineformset_factory(
     Income, IncomeProduct, fk_name='income', form=IncomeProductForm,
     extra=1, can_delete=True)
+
+

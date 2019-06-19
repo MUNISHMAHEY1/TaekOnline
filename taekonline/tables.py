@@ -1,4 +1,4 @@
-from taekonline.models import Student, Income
+from taekonline.models import Student, Income, IncomeProduct
 import django_tables2 as tables
 from django.utils.html import format_html
 
@@ -73,3 +73,26 @@ class IncomeTable(tables.Table):
         return record.income_date.strftime("%Y-%m-%d")
         return ' '.join((record.income_date.strftime("%Y-%m-%d"), record.income_time.strftime("%H:%M")))
     '''
+
+class IncomeProductTable(tables.Table):
+
+    '''
+    income = models.ForeignKey(Income, null=False, blank=False, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
+    quantity = models.IntegerField(null=False, blank=False, default=1)
+    profit = models.DecimalField(null=True, blank=True, max_digits=18, decimal_places=2)
+    '''
+    income_date = tables.Column(accessor='income.income_date', verbose_name='Income date')
+    income_datetime = tables.Column(accessor='income.income_datetime', verbose_name='Income date')
+    income_student = tables.Column(accessor='income.student.name', verbose_name='Student')
+
+
+    class Meta:
+        model = IncomeProduct
+        fields = ['id', 'income_datetime', 'product', 'quantity', 'profit', 'income_student'] # fields to display
+        attrs = {'id': 'incomeproduct_table'}
+
+    
+    def render_income_date(self, value, record):
+        return value.strftime("%Y-%m-%d")
+    

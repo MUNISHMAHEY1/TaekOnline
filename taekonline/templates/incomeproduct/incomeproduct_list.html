@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block extrahead %}
+<script>
+$(document).ready(function() {
+    $('#incomeproduct_table').DataTable();
+} );
+</script>
+{% endblock extrahead %}
+
+
+{% block content %}
+<nav class="navbar navbar-dark bg-primary" style="margin-top: 25px;margin-bottom: 25px;">
+    <a class="navbar-brand" href="#">Report</a>
+</nav>
+
+    {% csrf_token %}
+    {% if filter %}
+    <h1>Filters</h1>
+
+        <form action="" method="get" class="form form-horizontal">
+            {% bootstrap_form filter.form layout='horizontal'%}
+            <div class="row">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-success float-right">Filter</button>
+                </div>
+            </div>
+        </form>
+    {% endif %}
+    
+    <h1>Results</h1>
+
+    {% render_table table %}
+
+{% endblock content %}
