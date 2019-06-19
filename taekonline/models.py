@@ -139,12 +139,11 @@ class IncomeProduct(models.Model):
     def __str__(self):
         return ' '.join((str(self.income.id), self.product.name))
 
-    '''
     def save(self, *args, **kwargs):
-        self.profit = self.quantity * (self.product.selling_price - self.product.cost_price)
-        super(Model, self).save(*args, **kwargs)
-        #super().save(*args, **kwargs)
-    '''
+        if not self.id:
+            self.profit = self.quantity * (self.product.selling_price - self.product.cost_price)
+        #super(Model, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 

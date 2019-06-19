@@ -74,7 +74,7 @@ def rank_history(request, id, template_name='students/student_rank_history.html'
 		rh['attendances'] = []
 	for att in attendance:
 		for rh in rank_history:
-			if att['class_date'] < rh['exam_date']:
+			if att['class_date'] < rh['exam_date'] or (att['class_date'] > rh['exam_date'] and rh == rank_history[-1]):
 				rh['attendances'].append(att['class_date'])
 				break
 
@@ -102,7 +102,7 @@ def belt_exam(request, template_name='students/belt_exam.html'):
 
 	return render(request, template_name, {'students_table':students_table })
 
-
+@transaction.atomic
 def attendance(request, template_name='students/attendance.html'):
 	students_table = AttendanceTable(Student.objects.filter(active=True))
 	if request.POST:
@@ -115,7 +115,9 @@ def attendance(request, template_name='students/attendance.html'):
 		selected_student = list(map(int, request.POST.getlist('selected_student')))
 		students = Student.objects.filter(id__in=selected_student)
 		for student in students:
-			attendance = Attendance(student=student, class_date=class_datetime)
+			attendance = Attendance()
+			attendance.student=student
+			attendance.class_date=class_datetime
 			attendance.save()
 
 		msg = 'Atterndance for {dt} registred sucessfully.'.format(dt=datetime_str)
@@ -170,50 +172,11 @@ def income_add(request, template_name='income/income_form.html'):
 
 def incomeproduct(request, template_name='incomeproduct/incomeproduct_list.html'):
 
+	
 	queryset = IncomeProduct.objects.all()
 	f = IncomeProductFilter(request.GET, queryset=queryset)
 	table = IncomeProductTable(f.qs)
-	dtable = f.qs.all()
 
 	RequestConfig(request).configure(table)
-	return render(request, template_name, {'table':table, 'filter':f, 'dtable':dtable })
-	#incomeproduct_table = IncomeProductTable(Income.objects.all())
-	#return render(request, template_name, {'incomeproduct_table':incomeproduct_table })
+	return render(request, template_name, {'table':table, 'filter':f })
 
-
-
-'''
-
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
-from django.views import View
-import requests
-from django.contrib import messages
-import datetime
-from estatistica_pje import settings
-from .forms import FiltroProcessoForm
-from estatistica_pje.tables import ProcessoTable
-from django_tables2 import RequestConfig
-from .models import VwProcessoAcervo as Processo, TbOrgaoJulgador as Relator
-from .filters import ProcessoFilter
-
-from django_filters.views import FilterView
-from django_tables2.views import SingleTableMixin
- 
-
-def home(request):
-    
-    return render(request, 'home.html') 
-
-def processo_list(request):
-    
-    form = FiltroProcessoForm()
-    queryset = Processo.objects.all().using('pje')
-    f = ProcessoFilter(request.GET, queryset=queryset)
-    table = ProcessoTable(f.qs)
-    dtable = f.qs.all()
-    
-    RequestConfig(request).configure(table)
-    return render(request, 'processos.html', {'form': form, 'table':table, 'filter':f, 'dtable':dtable })
-
-'''

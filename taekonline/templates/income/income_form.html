@@ -7,7 +7,28 @@
     
     <script type="text/javascript">
         $( document ).ready(function() {
+            var date = new Date();
 
+            if (!$("#id_income_date").val()) {
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+
+                if (month < 10) month = "0" + month;
+                if (day < 10) day = "0" + day;
+
+                var today = year + "-" + month + "-" + day;       
+                $("#id_income_date").attr("value", today);
+            }
+
+            if (!$("#id_income_time").val()) {
+                var hour = date.getHours();
+                var minutes = date.getMinutes();
+                if(hour < 10) hour = '0' + hour; 
+                if(minutes < 10) minutes = '0' + minutes; 
+                var now = hour + ":" + minutes;
+                $("#id_income_time").attr("value", now);
+            }
         });
     </script>
     
