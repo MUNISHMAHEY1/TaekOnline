@@ -35,4 +35,5 @@ urlpatterns = [
     
     #path('student/add'), views.student_add, name='student_add'),
     path('product', views.product, name='product'),
+    path('product/add', views.product_add, name='product_add'),
 ]

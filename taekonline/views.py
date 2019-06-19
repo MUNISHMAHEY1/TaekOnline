@@ -6,9 +6,9 @@ from django.contrib import messages
 from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
-from taekonline.models import Student, RankHistory, Attendance, Income
-from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable
-from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet
+from taekonline.models import Student, RankHistory, Attendance, Income, Product
+from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable, ProductTable
+from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet,ProductForm
 from django.forms import formset_factory, inlineformset_factory
 from taekonline.business import StudentBusiness
 import datetime
@@ -118,8 +118,23 @@ def attendance(request, template_name='students/attendance.html'):
 
 
 
-def product(request):
-	return render(request, "products/product_list.html")
+def product(request,template_name='products/product_list.html'):
+	products_table = ProductTable(Product.objects.all())
+	return render(request, template_name, {'products_table':products_table })
+	#return render(request, "products/product_list.html")
+
+def product_add(request, template_name='products/product_form.html'):
+	if request.POST:
+		form = ProductForm(request.POST)
+		
+		if form.is_valid():
+			form.save()
+			return redirect('product')
+		else:
+			return render(request, template_name, {'form':form})
+	else:
+		form = ProductForm()
+	return render(request, template_name, {'form':form})
 
 
 def income(request, template_name='income/income_list.html'):

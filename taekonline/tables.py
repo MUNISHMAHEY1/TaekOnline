@@ -1,4 +1,4 @@
-from taekonline.models import Student, Income
+from taekonline.models import Student, Income,Product
 import django_tables2 as tables
 from django.utils.html import format_html
 
@@ -62,3 +62,12 @@ class IncomeTable(tables.Table):
         fields = ['id', 'date', 'student'] # fields to display
         attrs = {'id': 'income_table'}
 
+class ProductTable(tables.Table):
+    #actions = ProductActions(orderable=False) # custom tables.Column()
+    #select = tables.TemplateColumn('<input type="checkbox" name="selected_student" value="{{record.id}}" />')
+    #id = tables.TemplateColumn('<a href="/student/{{record.id}}/change">{{record.id}}</a>')
+    #action = tables.TemplateColumn('<a class="btn btn-small" onclick="return nextBelt({{record.id}})">Next Belt</a>')
+    class Meta:
+        model = Product
+        fields = ['id','name','description','cost_price','selling_price','quantity','keep_inventory'] # fields to display
+        attrs = {'id': 'products_table'}
