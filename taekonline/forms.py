@@ -164,9 +164,6 @@ IncomeProductFormSet = inlineformset_factory(
     Income, IncomeProduct, fk_name='income', form=IncomeProductForm,
     extra=1, can_delete=True)
 
-
-<<<<<<< HEAD
-###
 class ProductForm(forms.ModelForm):
 
     #date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
@@ -198,5 +195,3 @@ class ProductForm(forms.ModelForm):
             ),
             
         )
-=======
->>>>>>> 66d9a42b32e66c20cf5da6883621d0b9ddaedff4

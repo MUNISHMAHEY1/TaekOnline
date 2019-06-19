@@ -36,11 +36,9 @@ urlpatterns = [
 
     #path('student/add'), views.student_add, name='student_add'),
     path('product', views.product, name='product'),
-<<<<<<< HEAD
     path('product/add', views.product_add, name='product_add'),
-=======
+    
     path('about_us', views.about_us, name='about_us'),
     path('project', views.project, name='project'),
 
->>>>>>> 66d9a42b32e66c20cf5da6883621d0b9ddaedff4
 ]

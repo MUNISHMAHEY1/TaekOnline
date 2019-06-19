@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from taekonline.models import Student, Income,Product
-=======
-from taekonline.models import Student, Income, IncomeProduct
->>>>>>> 66d9a42b32e66c20cf5da6883621d0b9ddaedff4
+from taekonline.models import Student, Income, IncomeProduct, Product
 import django_tables2 as tables
 from django.utils.html import format_html
 
@@ -58,7 +54,6 @@ class IncomeTable(tables.Table):
         fields = ['id', 'income_datetime', 'student', 'products'] # fields to display
         attrs = {'id': 'income_table'}
 
-<<<<<<< HEAD
 class ProductTable(tables.Table):
     #actions = ProductActions(orderable=False) # custom tables.Column()
     #select = tables.TemplateColumn('<input type="checkbox" name="selected_student" value="{{record.id}}" />')
@@ -68,7 +63,6 @@ class ProductTable(tables.Table):
         model = Product
         fields = ['id','name','description','cost_price','selling_price','quantity','keep_inventory'] # fields to display
         attrs = {'id': 'products_table'}
-=======
 class IncomeProductTable(tables.Table):
 
     income_datetime = tables.Column(accessor='income.income_datetime', verbose_name='Income date')
@@ -82,4 +76,3 @@ class IncomeProductTable(tables.Table):
     def render_income_date(self, value, record):
         return value.strftime("%Y-%m-%d")
     
->>>>>>> 66d9a42b32e66c20cf5da6883621d0b9ddaedff4

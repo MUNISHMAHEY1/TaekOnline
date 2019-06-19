@@ -6,17 +6,11 @@ from django.contrib import messages
 from django.db.models import Count, F
 from django.utils import timezone
 from django.http import JsonResponse
-<<<<<<< HEAD
-from taekonline.models import Student, RankHistory, Attendance, Income, Product
-from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable, ProductTable
-from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet,ProductForm
-=======
 from taekonline.models import Student, RankHistory, Attendance, Income, Product, IncomeProduct
 from taekonline.tables import StudentTable, BeltExamTable, AttendanceTable, IncomeTable, \
-	IncomeProductTable
+	IncomeProductTable, ProductTable
 from taekonline.forms import StudentForm, StudentContactForm, StudentContactFormSet, \
-	IncomeForm, IncomeProductFormSet
->>>>>>> 66d9a42b32e66c20cf5da6883621d0b9ddaedff4
+	IncomeForm, IncomeProductFormSet, ProductForm
 from django.forms import formset_factory, inlineformset_factory
 from taekonline.business import StudentBusiness
 import datetime
