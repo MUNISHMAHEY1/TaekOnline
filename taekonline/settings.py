@@ -25,7 +25,6 @@ MESSAGE_TAGS = {
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -52,6 +51,8 @@ INSTALLED_APPS = [
     'crispy_forms_foundation',
     'phonenumber_field',
     'django_tables2',
+    'django_filters',
+    'bootstrap4',
     'taekonline.apps.TaekOnlineConfig',
 ]
 
@@ -147,3 +148,4 @@ BOOTSTRAP4 = {
     'include_jquery': True,
 }
 
+SHORT_DATETIME_FORMAT = 'Y-m-d H:i'

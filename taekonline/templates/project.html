@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<style>
+		.jumbotron{
+				background-color:#128EF5;
+				color:#ffffff;
+			}
+
+		</style>
+		<div class="jumbotron">
+            <h1 class="jump">Project Description</h1>
+
+        </div>
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-8">
+
+        <h5>
+            The scope of the project can be defined as follows:<br>
+			1. Allows userr to keep track of current as well as previous students<br>
+			2. Allows to register new students<br>
+			3. Keep track of the guardians and the emergency contact<br>
+			4. Allows store ownerr to keep track of the inventory of the accessories <br>
+        </h5>
+        </div>
+        <div class="col-sm-4">
+        <img src="{% static "images/stamp.jpg"%}" alt="Image cannot be found">
+        </div>
+        </div>
+        </div>
+
+
+{% endblock content %}
+
+
+{% block footer%}
+{{ block.super }}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom" style="background-color:black;">
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom">-->
+    <div class="container justify-content-center">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about_us' %}">About us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'project' %}">Project Description</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+{% endblock footer%}

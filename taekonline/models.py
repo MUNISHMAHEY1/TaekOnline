@@ -110,9 +110,25 @@ class Product(models.Model):
         return self.name
 
 class Income(models.Model):
-    date = models.DateTimeField(null=False, blank=False)
+    income_date = models.DateField(null=False, blank=False)
+    income_time = models.TimeField(null=False, blank=False)
     student = models.ForeignKey(Student, null=True, blank=True, on_delete=models.CASCADE)
-    products = models.ManyToManyField(to='Product', through='IncomeProduct')
+
+    @property
+    def income_datetime(self):
+        if self.income_date and self.income_time:
+            return ' '.join((self.income_date.strftime("%Y-%m-%d"), self.income_time.strftime("%H:%M")))
+        return None
+
+    @property
+    def products(self):
+        if self.incomeproduct_set.all().count() > 0:
+            products_str=''
+            for p in self.incomeproduct_set.all():
+                products_str = ''.join((products_str, p.product.name, ','))
+            return products_str
+        return None
+    
 
 class IncomeProduct(models.Model):
     income = models.ForeignKey(Income, null=False, blank=False, on_delete=models.CASCADE)
@@ -124,7 +140,9 @@ class IncomeProduct(models.Model):
         return ' '.join((str(self.income.id), self.product.name))
 
     def save(self, *args, **kwargs):
-        self.profit = self.quantity * (self.product.selling_price - self.product.cost_price)
+        if not self.id:
+            self.profit = self.quantity * (self.product.selling_price - self.product.cost_price)
+        #super(Model, self).save(*args, **kwargs)
         super().save(*args, **kwargs)
 
 
