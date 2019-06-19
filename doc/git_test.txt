@@ -1,3 +1,8 @@
 line 1
+<<<<<<< HEAD
 line 222
 line 3
+=======
+line 2
+line 33
+>>>>>>> 0059b4a98affb371e8f0d004b6ed930d09864ad1
