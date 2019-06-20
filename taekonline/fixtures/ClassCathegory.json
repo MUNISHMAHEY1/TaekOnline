@@ -1,0 +1,26 @@
+[
+{
+    "model": "taekonline.classcathegory",
+    "pk": 1,
+    "fields": {
+        "description": "Intermediate",
+        "color": "Blue"
+    }
+},
+{
+    "model": "taekonline.classcathegory",
+    "pk": 2,
+    "fields": {
+        "description": "Begginers",
+        "color": "Yellow"
+    }
+},
+{
+    "model": "taekonline.classcathegory",
+    "pk": 3,
+    "fields": {
+        "description": "Advanced",
+        "color": "Brown"
+    }
+}
+]

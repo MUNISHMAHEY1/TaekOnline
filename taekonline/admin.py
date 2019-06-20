@@ -35,7 +35,8 @@ class AttendanceAdmin(admin.ModelAdmin):
     list_display = ['id', 'student', 'class_date']
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'description', 'quantity', 'cost_price', 'selling_price']
+    list_display = ['id', 'name', 'description', 'quantity', 'cost_price', 'selling_price', 'keep_inventory']
+    list_editable = ['name', 'description', 'quantity', 'cost_price', 'selling_price', 'keep_inventory']
 
 class IncomeProductInline(admin.TabularInline):
     model = IncomeProduct

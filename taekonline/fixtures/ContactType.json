@@ -1,0 +1,23 @@
+[
+{
+    "model": "taekonline.contacttype",
+    "pk": 1,
+    "fields": {
+        "description": "Father"
+    }
+},
+{
+    "model": "taekonline.contacttype",
+    "pk": 2,
+    "fields": {
+        "description": "Mother"
+    }
+},
+{
+    "model": "taekonline.contacttype",
+    "pk": 3,
+    "fields": {
+        "description": "Other"
+    }
+}
+]

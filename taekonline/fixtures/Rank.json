@@ -1,0 +1,50 @@
+[
+{
+    "model": "taekonline.rank",
+    "pk": 1,
+    "fields": {
+        "description": "White",
+        "order": 0
+    }
+},
+{
+    "model": "taekonline.rank",
+    "pk": 2,
+    "fields": {
+        "description": "Yellow",
+        "order": 1
+    }
+},
+{
+    "model": "taekonline.rank",
+    "pk": 3,
+    "fields": {
+        "description": "Black",
+        "order": 9
+    }
+},
+{
+    "model": "taekonline.rank",
+    "pk": 4,
+    "fields": {
+        "description": "Green",
+        "order": 3
+    }
+},
+{
+    "model": "taekonline.rank",
+    "pk": 5,
+    "fields": {
+        "description": "Blue",
+        "order": 4
+    }
+},
+{
+    "model": "taekonline.rank",
+    "pk": 6,
+    "fields": {
+        "description": "Red",
+        "order": 5
+    }
+}
+]

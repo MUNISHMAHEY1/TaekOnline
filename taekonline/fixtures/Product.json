@@ -1,0 +1,62 @@
+[
+{
+    "model": "taekonline.product",
+    "pk": 1,
+    "fields": {
+        "name": "Membership",
+        "description": "Student Membership",
+        "cost_price": "0.00",
+        "selling_price": "30.00",
+        "quantity": 0,
+        "keep_inventory": false
+    }
+},
+{
+    "model": "taekonline.product",
+    "pk": 2,
+    "fields": {
+        "name": "Belt Exam",
+        "description": "Belt Exam",
+        "cost_price": "0.00",
+        "selling_price": "5.00",
+        "quantity": 0,
+        "keep_inventory": false
+    }
+},
+{
+    "model": "taekonline.product",
+    "pk": 3,
+    "fields": {
+        "name": "Belt",
+        "description": "Belt",
+        "cost_price": "10.00",
+        "selling_price": "20.00",
+        "quantity": 50,
+        "keep_inventory": true
+    }
+},
+{
+    "model": "taekonline.product",
+    "pk": 4,
+    "fields": {
+        "name": "Uniform",
+        "description": "Uniform",
+        "cost_price": "35.00",
+        "selling_price": "50.00",
+        "quantity": 60,
+        "keep_inventory": true
+    }
+},
+{
+    "model": "taekonline.product",
+    "pk": 5,
+    "fields": {
+        "name": "Sword",
+        "description": "Japanese Sword",
+        "cost_price": "45.00",
+        "selling_price": "80.00",
+        "quantity": 10,
+        "keep_inventory": true
+    }
+}
+]

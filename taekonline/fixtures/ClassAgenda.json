@@ -1,0 +1,50 @@
+[
+{
+    "model": "taekonline.classagenda",
+    "pk": 1,
+    "fields": {
+        "cathegory": 2,
+        "start_time": "12:30:00",
+        "end_time": "14:30:00",
+        "sunday": false,
+        "monday": true,
+        "tuesday": true,
+        "wednesday": false,
+        "thursday": true,
+        "friday": false,
+        "saturday": false
+    }
+},
+{
+    "model": "taekonline.classagenda",
+    "pk": 2,
+    "fields": {
+        "cathegory": 1,
+        "start_time": "10:00:00",
+        "end_time": "11:00:00",
+        "sunday": false,
+        "monday": false,
+        "tuesday": true,
+        "wednesday": false,
+        "thursday": false,
+        "friday": true,
+        "saturday": false
+    }
+},
+{
+    "model": "taekonline.classagenda",
+    "pk": 3,
+    "fields": {
+        "cathegory": 3,
+        "start_time": "18:00:00",
+        "end_time": "20:00:00",
+        "sunday": false,
+        "monday": true,
+        "tuesday": false,
+        "wednesday": true,
+        "thursday": false,
+        "friday": true,
+        "saturday": false
+    }
+}
+]
