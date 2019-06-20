@@ -150,6 +150,12 @@ def product_add(request, template_name='products/product_form.html'):
 		form = ProductForm()
 	return render(request, template_name, {'form':form})
 
+def product_delete(request, id):
+	Product.objects.get(id=int(id)).delete()
+	
+	return redirect('product')
+
+
 def about_us(request):
 	return render(request, "about_us.html")
 

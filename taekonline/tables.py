@@ -55,7 +55,7 @@ class IncomeTable(tables.Table):
 
 class ProductTable(tables.Table):
     #actions = ProductActions(orderable=False) # custom tables.Column()
-    #select = tables.TemplateColumn('<input type="checkbox" name="selected_student" value="{{record.id}}" />')
+    delete = tables.TemplateColumn('<a href="/product/{{record.id}}/delete"><i class="fas fa-trash-alt"></i></a>')
     #id = tables.TemplateColumn('<a href="/student/{{record.id}}/change">{{record.id}}</a>')
     #action = tables.TemplateColumn('<a class="btn btn-small" onclick="return nextBelt({{record.id}})">Next Belt</a>')
     class Meta:
