@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Sqlite" id="Project_12f117c" template="Default" database="Sqlite" >
+	<schema name="Default" schemaname="Default" >
+		<table name="auth_group" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="150" jt="12" mandatory="y" />
+			<index name="pk_auth_group" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="sqlite_autoindex_auth_group_1" unique="UNIQUE" >
+				<column name="name" />
+			</index>
+		</table>
+		<table name="auth_group_permissions" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="group_id" type="integer" jt="4" mandatory="y" />
+			<column name="permission_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_auth_group_permissions" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="auth_group_permissions_permission_id_84c5c92e" unique="NORMAL" >
+				<column name="permission_id" />
+			</index>
+			<index name="auth_group_permissions_group_id_b120cbf9" unique="NORMAL" >
+				<column name="group_id" />
+			</index>
+			<index name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq" unique="UNIQUE" >
+				<column name="group_id" />
+				<column name="permission_id" />
+			</index>
+			<fk name="Fk_auth_group_permissions" to_schema="Default" to_table="auth_group" >
+				<fk_column name="group_id" pk="id" />
+			</fk>
+			<fk name="Fk_auth_group_permissions" to_schema="Default" to_table="auth_permission" >
+				<fk_column name="permission_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_permission" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="content_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="codename" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" />
+			<index name="pk_auth_permission" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="auth_permission_content_type_id_2f476e4b" unique="NORMAL" >
+				<column name="content_type_id" />
+			</index>
+			<index name="auth_permission_content_type_id_codename_01ab375a_uniq" unique="UNIQUE" >
+				<column name="content_type_id" />
+				<column name="codename" />
+			</index>
+			<fk name="Fk_auth_permission" to_schema="Default" to_table="django_content_type" >
+				<fk_column name="content_type_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_user" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="password" type="varchar" length="128" jt="12" mandatory="y" />
+			<column name="last_login" type="datetime" jt="93" />
+			<column name="is_superuser" type="boolean" jt="-7" mandatory="y" />
+			<column name="username" type="varchar" length="150" jt="12" mandatory="y" />
+			<column name="first_name" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="254" jt="12" mandatory="y" />
+			<column name="is_staff" type="boolean" jt="-7" mandatory="y" />
+			<column name="is_active" type="boolean" jt="-7" mandatory="y" />
+			<column name="date_joined" type="datetime" jt="93" mandatory="y" />
+			<column name="last_name" type="varchar" length="150" jt="12" mandatory="y" />
+			<index name="pk_auth_user" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="sqlite_autoindex_auth_user_1" unique="UNIQUE" >
+				<column name="username" />
+			</index>
+		</table>
+		<table name="auth_user_groups" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="group_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_auth_user_groups" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="auth_user_groups_group_id_97559544" unique="NORMAL" >
+				<column name="group_id" />
+			</index>
+			<index name="auth_user_groups_user_id_6a12ed8b" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="auth_user_groups_user_id_group_id_94350c0c_uniq" unique="UNIQUE" >
+				<column name="user_id" />
+				<column name="group_id" />
+			</index>
+			<fk name="Fk_auth_user_groups" to_schema="Default" to_table="auth_group" >
+				<fk_column name="group_id" pk="id" />
+			</fk>
+			<fk name="Fk_auth_user_groups" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_user_user_permissions" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="permission_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_auth_user_user_permissions" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="auth_user_user_permissions_permission_id_1fbb5f2c" unique="NORMAL" >
+				<column name="permission_id" />
+			</index>
+			<index name="auth_user_user_permissions_user_id_a95ead1b" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" unique="UNIQUE" >
+				<column name="user_id" />
+				<column name="permission_id" />
+			</index>
+			<fk name="Fk_auth_user_user_permissions" to_schema="Default" to_table="auth_permission" >
+				<fk_column name="permission_id" pk="id" />
+			</fk>
+			<fk name="Fk_auth_user_user_permissions" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="django_admin_log" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="action_time" type="datetime" jt="93" mandatory="y" />
+			<column name="object_id" type="text" jt="-1" />
+			<column name="object_repr" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="change_message" type="text" jt="-1" mandatory="y" />
+			<column name="content_type_id" type="integer" jt="4" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="action_flag" type="smallint unsigned" jt="4" mandatory="y" />
+			<index name="pk_django_admin_log" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="django_admin_log_user_id_c564eba6" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="django_admin_log_content_type_id_c4bce8eb" unique="NORMAL" >
+				<column name="content_type_id" />
+			</index>
+			<fk name="Fk_django_admin_log" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+			<fk name="Fk_django_admin_log" to_schema="Default" to_table="django_content_type" >
+				<fk_column name="content_type_id" pk="id" />
+			</fk>
+		</table>
+		<table name="django_content_type" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="app_label" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="model" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_django_content_type" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="django_content_type_app_label_model_76bd3d3b_uniq" unique="UNIQUE" >
+				<column name="app_label" />
+				<column name="model" />
+			</index>
+		</table>
+		<table name="django_migrations" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="app" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="applied" type="datetime" jt="93" mandatory="y" />
+			<index name="pk_django_migrations" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="django_session" >
+			<column name="session_key" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="session_data" type="text" jt="-1" mandatory="y" />
+			<column name="expire_date" type="datetime" jt="93" mandatory="y" />
+			<index name="pk_django_session" unique="PRIMARY_KEY" >
+				<column name="session_key" />
+			</index>
+			<index name="django_session_expire_date_a5c62663" unique="NORMAL" >
+				<column name="expire_date" />
+			</index>
+		</table>
+		<table name="taekonline_attendance" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="class_date" type="datetime" jt="93" mandatory="y" />
+			<column name="student_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_taekonline_attendance" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="taekonline_attendance_student_id_b75c1821" unique="NORMAL" >
+				<column name="student_id" />
+			</index>
+			<fk name="Fk_taekonline_attendance" to_schema="Default" to_table="taekonline_student" >
+				<fk_column name="student_id" pk="id" />
+			</fk>
+		</table>
+		<table name="taekonline_classagenda" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="start_time" type="time" jt="92" mandatory="y" />
+			<column name="end_time" type="time" jt="92" mandatory="y" />
+			<column name="sunday" type="boolean" jt="-7" mandatory="y" />
+			<column name="monday" type="boolean" jt="-7" mandatory="y" />
+			<column name="tuesday" type="boolean" jt="-7" mandatory="y" />
+			<column name="wednesday" type="boolean" jt="-7" mandatory="y" />
+			<column name="thursday" type="boolean" jt="-7" mandatory="y" />
+			<column name="friday" type="boolean" jt="-7" mandatory="y" />
+			<column name="saturday" type="boolean" jt="-7" mandatory="y" />
+			<column name="cathegory_id" type="integer" jt="4" />
+			<index name="pk_taekonline_classagenda" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="taekonline_classagenda_cathegory_id_c91f5e00" unique="NORMAL" >
+				<column name="cathegory_id" />
+			</index>
+			<fk name="Fk_taekonline_classagenda" to_schema="Default" to_table="taekonline_classcathegory" >
+				<fk_column name="cathegory_id" pk="id" />
+			</fk>
+		</table>
+		<table name="taekonline_classcathegory" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="description" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="color" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_taekonline_classcathegory" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="taekonline_contacttype" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="description" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_taekonline_contacttype" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="taekonline_income" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="income_date" type="date" jt="91" mandatory="y" />
+			<column name="income_time" type="time" jt="92" mandatory="y" />
+			<column name="student_id" type="integer" jt="4" />
+			<index name="pk_taekonline_income" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="taekonline_income_student_id_b6c08421" unique="NORMAL" >
+				<column name="student_id" />
+			</index>
+			<fk name="Fk_taekonline_income" to_schema="Default" to_table="taekonline_student" >
+				<fk_column name="student_id" pk="id" />
+			</fk>
+		</table>
+		<table name="taekonline_incomeproduct" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="quantity" type="integer" jt="4" mandatory="y" />
+			<column name="profit" type="decimal" jt="3" />
+			<column name="income_id" type="integer" jt="4" mandatory="y" />
+			<column name="product_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_taekonline_incomeproduct" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="taekonline_incomeproduct_product_id_d33e9d05" unique="NORMAL" >
+				<column name="product_id" />
+			</index>
+			<index name="taekonline_incomeproduct_income_id_484fe3eb" unique="NORMAL" >
+				<column name="income_id" />
+			</index>
+			<fk name="Fk_taekonline_incomeproduct" to_schema="Default" to_table="taekonline_income" >
+				<fk_column name="income_id" pk="id" />
+			</fk>
+			<fk name="Fk_taekonline_incomeproduct" to_schema="Default" to_table="taekonline_product" >
+				<fk_column name="product_id" pk="id" />
+			</fk>
+		</table>
+		<table name="taekonline_product" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="cost_price" type="decimal" jt="3" mandatory="y" />
+			<column name="selling_price" type="decimal" jt="3" mandatory="y" />
+			<column name="quantity" type="integer" jt="4" mandatory="y" />
+			<column name="keep_inventory" type="boolean" jt="-7" mandatory="y" />
+			<index name="pk_taekonline_product" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="sqlite_autoindex_taekonline_product_1" unique="UNIQUE" >
+				<column name="name" />
+			</index>
+		</table>
+		<table name="taekonline_rank" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="description" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="order" type="integer" jt="4" mandatory="y" />
+			<index name="pk_taekonline_rank" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="sqlite_autoindex_taekonline_rank_1" unique="UNIQUE" >
+				<column name="order" />
+			</index>
+		</table>
+		<table name="taekonline_rankhistory" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="exam_date" type="datetime" jt="93" mandatory="y" />
+			<column name="rank_id" type="integer" jt="4" mandatory="y" />
+			<column name="student_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_taekonline_rankhistory" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="taekonline_rankhistory_student_id_281556ef" unique="NORMAL" >
+				<column name="student_id" />
+			</index>
+			<index name="taekonline_rankhistory_rank_id_1dbf32f9" unique="NORMAL" >
+				<column name="rank_id" />
+			</index>
+			<fk name="Fk_taekonline_rankhistory" to_schema="Default" to_table="taekonline_rank" >
+				<fk_column name="rank_id" pk="id" />
+			</fk>
+			<fk name="Fk_taekonline_rankhistory" to_schema="Default" to_table="taekonline_student" >
+				<fk_column name="student_id" pk="id" />
+			</fk>
+		</table>
+		<table name="taekonline_student" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="first_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="date_of_birth" type="date" jt="91" mandatory="y" />
+			<column name="date_joined" type="datetime" jt="93" mandatory="y" />
+			<column name="phone_number" type="varchar" length="128" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="254" jt="12" mandatory="y" />
+			<column name="address_number" type="integer" jt="4" mandatory="y" />
+			<column name="address_street" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="address_complement" type="varchar" length="200" jt="12" />
+			<column name="address_zip_code" type="varchar" length="6" jt="12" mandatory="y" />
+			<column name="address_city" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="active" type="boolean" jt="-7" mandatory="y" />
+			<index name="pk_taekonline_student" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="taekonline_studentcontact" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="first_name" type="varchar" length="100" jt="12" />
+			<column name="last_name" type="varchar" length="100" jt="12" />
+			<column name="phone_number" type="varchar" length="128" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="254" jt="12" />
+			<column name="contact_id" type="integer" jt="4" />
+			<column name="contact_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="student_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_taekonline_studentcontact" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="taekonline_studentcontact_student_id_406193da" unique="NORMAL" >
+				<column name="student_id" />
+			</index>
+			<index name="taekonline_studentcontact_contact_type_id_36725bb6" unique="NORMAL" >
+				<column name="contact_type_id" />
+			</index>
+			<index name="taekonline_studentcontact_contact_id_cd24001a" unique="NORMAL" >
+				<column name="contact_id" />
+			</index>
+			<fk name="Fk_taekonline_studentcontact" to_schema="Default" to_table="taekonline_contacttype" >
+				<fk_column name="contact_type_id" pk="id" />
+			</fk>
+			<fk name="Fk_taekonline_studentcontact" to_schema="Default" to_table="taekonline_student" >
+				<fk_column name="student_id" pk="id" />
+				<fk_column name="contact_id" pk="id" />
+			</fk>
+		</table>
+		<table name="tastypie_apiaccess" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="identifier" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="request_method" type="varchar" length="10" jt="12" mandatory="y" />
+			<column name="accessed" type="integer unsigned" jt="4" mandatory="y" />
+			<column name="url" type="text" jt="-1" mandatory="y" />
+			<index name="pk_tastypie_apiaccess" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="tastypie_apikey" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="key" type="varchar" length="128" jt="12" mandatory="y" />
+			<column name="created" type="datetime" jt="93" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_tastypie_apikey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="tastypie_apikey_key_17b411bb" unique="NORMAL" >
+				<column name="key" />
+			</index>
+			<index name="sqlite_autoindex_tastypie_apikey_1" unique="UNIQUE" >
+				<column name="user_id" />
+			</index>
+			<fk name="Fk_tastypie_apikey" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.27.2.1.jar" driver_desc="Standard" host="localhost" port="7210" instance="/home/fabio/workspace_python/taekonline/db.sqlite3" />
+	<layout name="Default Layout" id="Layout_4a08dac" show_relation="columns" >
+		<comment><![CDATA[er_diagram]]></comment>
+		<entity schema="Default" name="taekonline_rank" color="0000FF" x="880" y="48" />
+		<entity schema="Default" name="taekonline_rankhistory" color="0000FF" x="400" y="48" />
+		<entity schema="Default" name="taekonline_income" color="0000FF" x="656" y="128" />
+		<entity schema="Default" name="taekonline_incomeproduct" color="0000FF" x="640" y="336" />
+		<entity schema="Default" name="taekonline_product" color="0000FF" x="960" y="304" />
+		<entity schema="Default" name="taekonline_contacttype" color="0000FF" x="752" y="592" />
+		<entity schema="Default" name="taekonline_attendance" color="0000FF" x="96" y="48" />
+		<entity schema="Default" name="taekonline_classagenda" color="0000FF" x="64" y="320" />
+		<entity schema="Default" name="taekonline_classcathegory" color="0000FF" x="48" y="656" />
+		<entity schema="Default" name="taekonline_student" color="0000FF" x="352" y="288" />
+		<entity schema="Default" name="taekonline_studentcontact" color="0000FF" x="352" y="608" />
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_5a3e03c" show_column_type="y" show_relation="columns" >
+		<entity schema="Default" name="auth_group" color="BEBEF4" x="816" y="496" />
+		<entity schema="Default" name="auth_group_permissions" color="BEBEF4" x="1072" y="496" />
+		<entity schema="Default" name="auth_permission" color="BEBEF4" x="576" y="176" />
+		<entity schema="Default" name="auth_user" color="BEBEF4" x="288" y="176" />
+		<entity schema="Default" name="auth_user_groups" color="BEBEF4" x="576" y="496" />
+		<entity schema="Default" name="auth_user_user_permissions" color="BEBEF4" x="272" y="496" />
+		<entity schema="Default" name="django_admin_log" color="BED3F4" x="48" y="704" />
+		<entity schema="Default" name="django_content_type" color="BED3F4" x="336" y="704" />
+		<entity schema="Default" name="django_migrations" color="BED3F4" x="336" y="944" />
+		<entity schema="Default" name="django_session" color="BED3F4" x="48" y="944" />
+		<entity schema="Default" name="taekonline_attendance" color="C7F4BE" x="1344" y="496" />
+		<entity schema="Default" name="taekonline_classagenda" color="F4DDBE" x="3024" y="176" />
+		<entity schema="Default" name="taekonline_classcathegory" color="F4DDBE" x="3264" y="176" />
+		<entity schema="Default" name="taekonline_contacttype" color="F4DDBE" x="2752" y="176" />
+		<entity schema="Default" name="taekonline_income" color="C7F4BE" x="1680" y="176" />
+		<entity schema="Default" name="taekonline_incomeproduct" color="C7F4BE" x="1904" y="176" />
+		<entity schema="Default" name="taekonline_product" color="C7F4BE" x="2160" y="176" />
+		<entity schema="Default" name="taekonline_rank" color="C7F4BE" x="1920" y="496" />
+		<entity schema="Default" name="taekonline_rankhistory" color="C7F4BE" x="1680" y="496" />
+		<entity schema="Default" name="taekonline_student" color="C7F4BE" x="1344" y="176" />
+		<entity schema="Default" name="taekonline_studentcontact" color="F4DDBE" x="2464" y="176" />
+		<entity schema="Default" name="tastypie_apiaccess" color="3986C1" x="1024" y="704" />
+		<entity schema="Default" name="tastypie_apikey" color="BEBEF4" x="48" y="288" />
+		<callout x="288" y="80" pointer="NO" >
+			<comment><![CDATA[This is a sample layout with tools. 
+For better understanding the schema create multiple layouts with the same or different tables. 
+Layouts can contain data or query tools, like the one on the bottom. 
+Layouts are saved together with the schema to project file. 
+Double-click any table, column or foreign key to edit.]]></comment>
+		</callout>
+		<group name="django_admin_log" color="ECF0F7" >
+			<entity schema="Default" name="django_admin_log" />
+			<entity schema="Default" name="django_content_type" />
+			<entity schema="Default" name="django_migrations" />
+			<entity schema="Default" name="django_session" />
+		</group>
+		<group name="taekonline_studentcontact" color="F7F2EC" >
+			<entity schema="Default" name="taekonline_studentcontact" />
+			<entity schema="Default" name="taekonline_contacttype" />
+			<entity schema="Default" name="taekonline_classagenda" />
+			<entity schema="Default" name="taekonline_classcathegory" />
+		</group>
+		<group name="taekonline_student" color="EEF7EC" >
+			<entity schema="Default" name="taekonline_student" />
+			<entity schema="Default" name="taekonline_income" />
+			<entity schema="Default" name="taekonline_incomeproduct" />
+			<entity schema="Default" name="taekonline_rankhistory" />
+			<entity schema="Default" name="taekonline_attendance" />
+			<entity schema="Default" name="taekonline_product" />
+			<entity schema="Default" name="taekonline_rank" />
+		</group>
+		<group name="auth_user" color="ECECF7" >
+			<entity schema="Default" name="auth_user" />
+			<entity schema="Default" name="auth_permission" />
+			<entity schema="Default" name="auth_user_groups" />
+			<entity schema="Default" name="auth_group" />
+			<entity schema="Default" name="auth_group_permissions" />
+			<entity schema="Default" name="auth_user_user_permissions" />
+			<entity schema="Default" name="tastypie_apikey" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_bb1b5a" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	auth_user r;]]></string>
+		</script>
+		<browser id="Browse_5291133" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="Default" entity="auth_user" x="20" y="20" width="400" height="300" >
+				<browse_table schema="Default" entity="auth_user_groups" fk="Fk_auth_user_groups" x="440" y="20" width="500" height="350" >
+					<browse_table schema="Default" entity="auth_group" fk="Fk_auth_user_groups" x="960" y="20" width="500" height="350" record_view="y" />
+				</browse_table>
+			</browse_table>
+		</browser>
+		<query id="Query_4b071e9" name="Sample Query Builder" >
+			<query_table schema="Default" name="auth_user" alias="au" x="48" y="48" >
+				<column name="id" />
+				<column name="password" />
+				<column name="last_login" />
+				<column name="is_superuser" />
+				<column name="username" />
+				<column name="first_name" />
+				<column name="email" />
+				<column name="is_staff" />
+				<column name="is_active" />
+				<column name="date_joined" />
+				<column name="last_name" />
+				<query_table schema="Default" name="auth_user_groups" alias="aug" x="240" y="48" fk="Fk_auth_user_groups" type="Inner Join" >
+					<column name="id" />
+					<column name="user_id" />
+					<column name="group_id" />
+					<query_table schema="Default" name="auth_group" alias="ag" x="480" y="48" fk="Fk_auth_user_groups" type="Inner Join" >
+						<column name="id" />
+						<column name="name" />
+					</query_table>
+				</query_table>
+			</query_table>
+		</query>
+	</layout>
+</project>
