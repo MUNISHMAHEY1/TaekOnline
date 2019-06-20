@@ -4,40 +4,30 @@ This is a project for database course of MAC of University of Windsor.
 
 Taekonline is a Python/Django Web Application that uses SQLite Database.
 
-To run the server in dev mode, open a terminal
+To run the application in dev mode, you must have Python 3.6.7 installed.
 
-1 - Install Python 3.6.7
-
+1 - Extract the source-code of the project
+```
+unzip taekonline-master.zip
+```
 2 - Create a virtual enviroment
+```
+mkdir env
+python3 -m venv env/taekonline
+source env/taekonline/bin/activate
+```
+3 - Install the required libs
+```
+cd taekonline-master/
+pip install -r requirements.txt
+```
 
-`python3 -v venv taekonline`
-
-3 - Activate enviroment
-
-`source taekonline/bin/activate`
-
-4 - Clone or download the repository:
-
-Clone:
-`git clone https://gitlab.com/fabio.ribeiro.santiago/taekonline.git`
-
-Or download:
-`https://gitlab.com/fabio.ribeiro.santiago/taekonline/-/archive/master/taekonline-master.zip`
-
-5 - In project root folder, install dependencies in requirements.txt:
-
-`pip install -r requirements.txt`
-
-6 - Collect static files:
-
-`python manage.py collectstatics`
-
-7 - Run the system:
-
-`python manage.py runserver`
-
-8 - Access the system:
-
-`http://localhost:8000/`
-
-
+4 - Collect static files
+```
+python manage.py collectstatic
+```
+5 - Run the system:
+```
+python manage.py runserver
+```
+6 - Open a browser at [http://localhost:8000](http://localhost:8000)
