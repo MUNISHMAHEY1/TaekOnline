@@ -70,14 +70,35 @@ def rank_history(request, id, template_name='students/student_rank_history.html'
 	rank_history = list(RankHistory.objects.filter(student__id=int(id)).values('rank__description', 'exam_date').order_by('exam_date'))
 	attendance = Attendance.objects.filter(student__id=int(id)).order_by('class_date').values()
 
+	att_count = attendance.count()
+	rh_count = len(rank_history)
+
+	'''
+	if rank_history_count == 0 or attendance_count == 0:
+		return render(request, template_name, {'student': student, 'rank_history': rank_history})	
+	'''
+
 	for rh in rank_history:
 		rh['attendances'] = []
-	for att in attendance:
-		for rh in rank_history:
-			if att['class_date'] < rh['exam_date'] or (att['class_date'] > rh['exam_date'] and rh == rank_history[-1]):
-				rh['attendances'].append({ 'class_date': att['class_date'], 'id':att['id'] })
-				break
 
+	att_index = 0
+	rh_index = 0
+	while att_index < (att_count - 1):
+		att = attendance[att_index]
+		rh = rank_history[rh_index]
+		if rh_index == rh_count - 1:
+			rh['attendances'].append({ 'class_date': att['class_date'], 'id':att['id'] })
+			att_index = att_index + 1
+		elif att['class_date'] >= rh['exam_date'] and att['class_date'] < rank_history[rh_index+1]['exam_date']:
+			rh['attendances'].append({ 'class_date': att['class_date'], 'id':att['id'] })
+			att_index = att_index + 1
+		elif att['class_date'] < rh['exam_date'] and rh_index == 0:
+			rh['attendances'].append({ 'class_date': att['class_date'], 'id':att['id'] })
+			att_index = att_index + 1
+		else:
+			rh_index = rh_index + 1
+		
+	
 	return render(request, template_name, {'student': student, 'rank_history': rank_history})
 
 def student_activate(request, id):
