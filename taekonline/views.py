@@ -155,6 +155,26 @@ def product_delete(request, id):
 	
 	return redirect('product')
 
+#@transaction.atomic
+def product_change(request, id, template_name='products/product_form.html'):
+	product = Product.objects.get(id=int(id))
+	if request.POST:
+		form = ProductForm(request.POST, instance=product)
+		#formset = ProductForm(request.POST, request.FILES, instance=product)
+
+		#if form.is_valid() and formset.is_valid():
+		if form.is_valid():
+			form.save()
+			#formset.save()
+			return redirect('product')
+		else:
+			#return render(request, template_name, {'form':form, 'formset':formset})
+			return render(request, template_name, {'form':form})
+	else:
+		form = ProductForm(instance=product)
+		#formset = ProductForm(instance=product)
+	#return render(request, template_name, {'form':form, 'formset':formset})
+	return render(request, template_name, {'form':form})
 
 def about_us(request):
 	return render(request, "about_us.html")

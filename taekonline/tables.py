@@ -56,12 +56,15 @@ class IncomeTable(tables.Table):
 class ProductTable(tables.Table):
     #actions = ProductActions(orderable=False) # custom tables.Column()
     delete = tables.TemplateColumn('<a href="/product/{{record.id}}/delete"><i class="fas fa-trash-alt"></i></a>')
-    #id = tables.TemplateColumn('<a href="/student/{{record.id}}/change">{{record.id}}</a>')
+    #id = tables.TemplateColumn('<a href="/product/{{record.id}}/change">{{record.id}}</a>')
+    id = tables.TemplateColumn('<a href="/product/{{record.id}}/change">{{record.id}}</a>')
     #action = tables.TemplateColumn('<a class="btn btn-small" onclick="return nextBelt({{record.id}})">Next Belt</a>')
     class Meta:
         model = Product
         fields = ['id','name','description','cost_price','selling_price','quantity','keep_inventory'] # fields to display
         attrs = {'id': 'products_table'}
+
+
 class IncomeProductTable(tables.Table):
 
     income_datetime = tables.Column(accessor='income.income_datetime', verbose_name='Income date')

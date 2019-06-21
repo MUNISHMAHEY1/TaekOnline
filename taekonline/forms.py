@@ -166,20 +166,16 @@ IncomeProductFormSet = inlineformset_factory(
 
 class ProductForm(forms.ModelForm):
 
-    #date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
-
     class Meta:
         model = Product
         fields = '__all__'
-        #fields = ['pub_date', 'headline', 'content', 'reporter']
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
         #self.helper.form_id = 'id-student-form'
         self.helper.form_method = 'post'
-        #self.helper['date_of_birth'].widget.attrs.update({'type': 'date'})
-        #self.helper.form_action = 'submit_survey'
         self.helper.layout = Layout(
             Fieldset(
                 'Product Data',
