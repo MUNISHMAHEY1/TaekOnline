@@ -191,3 +191,13 @@ class ProductForm(forms.ModelForm):
             ),
             
         )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        keep_inventory = cleaned_data.get("keep_inventory")
+        quantity = cleaned_data.get("quantity")
+
+        if not keep_inventory:
+            if quantity > 0:
+                msg = "Keep Inventory not selected"
+                self.add_error('quantity', msg)
